@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuan.mapper.UserMapper">
+
+
+
+    <select id="getRoleList" resultMap="UserRole">
+        select * from user1 where username = #{username}
+    </select>
+
+    <resultMap id="UserRole" type="User">
+        <collection property="roleList" javaType="List" ofType="Role" column="id" select="getRoles"></collection>
+    </resultMap>
+
+    <select id="getRoles" resultType="Role">
+        select * from role where user_id = #{id}
+    </select>
+
+</mapper>
